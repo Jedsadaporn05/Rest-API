@@ -26,11 +26,19 @@ DELETE /users/:id สำหรับการลบ users รายคน (ต�
 
 // path = GET /users
 app.get('/users', (req, res) => {
-    res.json(users)
+    const filterUsers = users.map(user => {
+        return {
+            id: user.id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            fullname: user.firstname + ' ' + user.lastname,
+        }
+    })
+    res.json(filterUsers)
 })
 
 // path = POST /user
-app.post('/user', (req, res) => {
+app.post('/users', (req, res) => {
     let user = req.body 
     user.id = counter
     counter += 1
@@ -41,21 +49,29 @@ app.post('/user', (req, res) => {
     })
 })
 
-// path = PUT /user/:id
-app.patch('/user/:id', (req, res) => {
+// GET /users/:id สำหรับการดึง users รายคนออกมา
+app.get('/users/:id', (req, res) => {
+    let id = req.params.id;
+
+    // หาก่อนว่า index ของ user ที่ต้องการจะลบคือ index ไหน
+    let selectedIndex = users.findIndex(user => user.id == id)
+
+    // หา index
+    res.json(users[selectedIndex])
+})
+
+// path = PUT /user/:id สำหรับแก้ไข users รายคน (ตาม id ที่บันทึกเข้าไป)
+app.put('/users/:id', (req, res) => {
     let id = req.params.id;
     let updateUser = req.body;
 
     // หา users จาก id ที่ส่งมา
     let selectedIndex = users.findIndex(user => user.id == id)
     // update users นั้น
-    if (updateUser.firstname) {
-        users[selectedIndex].firstname = updateUser.firstname
-    }
-
-    if (updateUser.lastname) {
-        users[selectedIndex].lastname = updateUser.lastname
-    }
+        users[selectedIndex].firstname = updateUser.firstname || users[selectedIndex].firstname
+        users[selectedIndex].lastname = updateUser.lastname || users[selectedIndex].lastname
+        users[selectedIndex].age = updateUser.age || users[selectedIndex].age
+        users[selectedIndex].gender = updateUser.gender || users[selectedIndex].gender
 
     // put
     // users[selectedIndex].firstname = updateUser.firstname || users[selectedIndex].firstname
@@ -70,7 +86,7 @@ app.patch('/user/:id', (req, res) => {
     })
 })
 
-// path = DELETE /users/:id
+// path = DELETE /users/:id สำหรับการลบ users รายคน (ตาม id ที่บันทึกเข้าไป)
 app.delete('/users/:id', (req, res) => {
     let id = req.params.id;
 
