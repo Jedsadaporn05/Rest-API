@@ -1,0 +1,124 @@
+/* สิ่งที่อยู่ตรงนี้ จะมีไว้แค่ให้ dev อ่าน */
+/* 1. แต่งใคร ? (id, class, DOM) 2. แต่งอะไร ? */
+@font-face {
+  font-family: "Roboto", sans-serif;
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  padding: 0px;
+  margin: 0px;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: lightcyan;
+  padding: 70px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.header {
+  font-size: 30px;
+  text-align: center;
+  padding: 10px 0px 10px 0px;
+}
+
+.header-form {
+  width: 140px;
+}
+
+.flex {
+  display: flex;
+}
+
+.form-input {
+  margin-bottom: 10px;
+}
+
+.center {
+  text-align: center;
+}
+
+input.form,
+textarea {
+  border: 1px gainsboro solid;
+  width: 100%;
+}
+
+.button {
+  border: 0;
+  width: 50%;
+  height: 40px;
+  background-color: #2962ff;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #0041f3;
+  transform: scale(1.02);
+}
+
+a.button {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin: 10px 0px 0px 10px;
+  padding: 10px 10px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a.button:hover {
+  background-color: #45a049;
+  transform: scale(1.03);
+}
+
+a.button:active {
+  transform: scale(0.98);
+}
+
+.message {
+  background-color: lightgray;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.message.success {
+  background-color: lightgreen;
+  display: block;
+}
+
+.message.error {
+  background-color: lightcoral;
+  display: block;
+}
+
+/* เพิ่ม code ส่วนนี้สำหรับการ handle ที่ขนาดหน้าจอเล็ก ให้แสดงผลออกมาตามโจทย์ */
+@media screen and (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+  }
+
+  .header {
+    font-size: 24px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
